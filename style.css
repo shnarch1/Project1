@@ -1,26 +1,38 @@
 body{
     background: url(tile.jpg);
+    margin:0;
 }
 
-#title > img{
+#header{
     display: block;
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 20px auto ;
 }
 
-#input-container {
-    width:50%;
-    margin:0 auto;
-    background: url("formbg.jpg") repeat-y center 100%;
-    height:198px;
+@media only screen and (max-width: 600px){
+    #header {
+        width:100%;
+    }
 }
 
-.note{
+#input-container{
     position: relative;
 }
 
-.trash-icon {
-    visibility: hidden;
+.input-background {
+    display: block;
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width: 600px){
+    .input-background {
+        width:100%;
+    }
+}
+
+textarea{
+
+    width: 100%;
 
 }
 
