@@ -1,0 +1,33 @@
+body{
+    background: url(tile.jpg);
+}
+
+#title > img{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#input-container {
+    width:50%;
+    margin:0 auto;
+    background: url("formbg.jpg") repeat-y center 100%;
+    height:198px;
+}
+
+.note{
+    position: relative;
+}
+
+.trash-icon {
+    visibility: hidden;
+
+}
+
+.note-image:hover+.trash-icon{
+    width:30px;
+    visibility: visible;
+    position: absolute;
+    left:170px;
+    top: 25px;
+}
