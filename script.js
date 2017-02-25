@@ -75,10 +75,13 @@ function createNoteElement(text, date, time){
     var note_img = createImageElement(config.note_iamge);
     var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
     var note_text = createParagraphElement(text, "note-text");
-
+    var note_date = createParagraphElement("test_date", "note-date");
+    var note_time = createParagraphElement("test_time", "note-time");
     note.appendChild(trash_icon);
     note.appendChild(note_img);
     note.appendChild(note_text);
+    note.appendChild(note_date);
+    note.appendChild(note_time);
 
     return note;
 };
