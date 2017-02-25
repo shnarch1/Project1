@@ -64,6 +64,7 @@ body{
 	width: 90%;
 	max-width: 600px;
 	margin: 0 auto;
+	margin-bottom: 20px;
     position: relative;
 	background: url("formbg.jpg");
 	background-repeat: repeat-y;
@@ -79,11 +80,17 @@ body{
 	width: 100%;
 	line-height: 33px;
 	font-size: large;
-	overflow:auto;
 }
 
 textarea:focus{
 	outline: 0;
+}
+
+#input-footer{
+	padding-left: 80px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 #notes-container{
@@ -91,6 +98,45 @@ textarea:focus{
 	margin:0 auto;
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.note{
+	padding-left:35px;
+	position: relative;
+
+}
+
+.note-text{
+	position: absolute;
+	top: 45px;
+	left: 40px;
+	margin-bottom: 0;
+	width: 170px;
+	height:150px;
+	overflow: auto;
+}
+
+.note-date{
+	position: absolute;
+	margin-bottom: 0;
+	width:160px;
+	bottom: 35px;
+	left: 40px;
+}
+
+.note-time{
+	position: absolute;
+	margin-bottom: 0;
+	width:160px;
+	bottom: 15px;
+	left: 40px;
+}
+
+.note-trash-icon{
+	position: absolute;
+	width:50px;
+	right:10px;
+	top:15px;
 }
 
 .input-background {

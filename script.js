@@ -5,7 +5,10 @@
 //var form = document.querySelector("div");
 //console.dir(form);
 
-
+var config = {
+    trash_icon_url:'http://www.endlessicons.com/wp-content/uploads/2012/12/trash-icon-614x460.png',
+    note_iamge:'notebg.png'
+}
 
 var form = document.querySelector("#input-container form");
 form.addEventListener("submit",save_note);
@@ -46,3 +49,50 @@ function save_note(event){
 
     add_and_backup_note(new_note);
 }
+
+function createElement(tag_name, class_name){
+    var element = document.createElement(tag_name);
+    if  (class_name != null){
+        element.classList.add(class_name);
+    }
+    return element;
+}
+
+function createImageElement(src, class_name){
+    var img = createElement("img", class_name);
+    img.src=src;
+    return img;
+};
+
+function createParagraphElement(text, class_name) {
+    var p_tag = createElement("p", class_name);
+    p_tag.textContent = text;
+    return p_tag;
+};
+
+function createNoteElement(text, date, time){
+    var note = createElement("div", "note");
+    var note_img = createImageElement(config.note_iamge);
+    var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
+    var p = createParagraphElement(text, "note-text");
+
+    note.appendChild(trash_icon);
+    note.appendChild(note_img);
+    note.appendChild(p);
+
+    return note;
+};
+
+//var p = createParagraphElement("avi is here", "note-text")
+//console.dir(p);
+
+var note = createNoteElement("Hi, Avi is here!");
+//console.dir(note);
+section = document.querySelector("#notes-container")
+section.appendChild(note);
+
+//var p = createElement("p","note-text")
+//document.body.appendChild(p)
+//var p2 = createParagraphElement("p2","note-text" )
+//document.body.appendChild(p2)
+//console.dir(p2)
