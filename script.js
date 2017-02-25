@@ -74,11 +74,11 @@ function createNoteElement(text, date, time){
     var note = createElement("div", "note");
     var note_img = createImageElement(config.note_iamge);
     var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
-    var p = createParagraphElement(text, "note-text");
+    var note_text = createParagraphElement(text, "note-text");
 
     note.appendChild(trash_icon);
     note.appendChild(note_img);
-    note.appendChild(p);
+    note.appendChild(note_text);
 
     return note;
 };
