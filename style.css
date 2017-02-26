@@ -134,6 +134,7 @@ textarea:focus{
 
 .note-trash-icon{
 	position: absolute;
+	visibility: hidden;
 	width:50px;
 	right:10px;
 	top:15px;
@@ -152,10 +153,10 @@ textarea:focus{
 }*/
 
 
-.note-image:hover+.trash-icon{
-    width:30px;
-    visibility: visible;
-    position: absolute;
-    left:170px;
-    top: 25px;
+.note-img:hover ~ .note-trash-icon{
+	position: absolute;
+	visibility: visible;
+	width:50px;
+	right:10px;
+	top:15px;
 }
