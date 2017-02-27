@@ -90,6 +90,8 @@ function printNote(note_element){
 
     notes_container = document.querySelector("#notes-container");
     notes_container.appendChild(note_element);
+    note_element.classList.add("note-fade-in");
+
 }
 
 function save_note(event){

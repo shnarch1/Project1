@@ -103,7 +103,12 @@ textarea:focus{
 .note{
 	padding-left:35px;
 	position: relative;
+	opacity: 0;
+	transition: opacity 2s linear;
+}
 
+.note-fade-in{
+	opacity: 1;
 }
 
 .note-text{
@@ -138,6 +143,7 @@ textarea:focus{
 	width:50px;
 	right:10px;
 	top:15px;
+	cursor: pointer;
 }
 
 
@@ -155,6 +161,6 @@ textarea:focus{
 
 
 .note-img:hover + .note-trash-icon, .note-trash-icon:hover{
-	/* The second hover wass added in order to prevent icon jitter*/
+	/* The second hover was added in order to prevent icon jitter*/
 	opacity: 1;
 }
