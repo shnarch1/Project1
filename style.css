@@ -107,6 +107,7 @@ textarea:focus{
 	transition: opacity 2s linear;
 }
 
+
 .note-fade-in{
 	opacity: 1;
 }

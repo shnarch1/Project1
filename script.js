@@ -13,6 +13,8 @@ var config = {
 var form = document.querySelector("#input-container > form");
 form.addEventListener("submit",save_note);
 
+var trash_icon = document.querySelector(".note-trash-icon")
+trash_icon.addEventListener("click",deleteNote)
 var my_notes = [];
 
 window.onload = sync_storage();
@@ -90,7 +92,7 @@ function printNote(note_element){
 
     notes_container = document.querySelector("#notes-container");
     notes_container.appendChild(note_element);
-    note_element.classList.add("note-fade-in");
+    note_element.className += " note-fade-in";
 
 }
 
@@ -114,9 +116,14 @@ function save_note(event){
     new_note_element = createNoteElement(new_note_object.text, new_note_object.date, new_note_object.time);
     //console.log(new_note_element);
     printNote(new_note_element);
+    new_note_element.querySelector(".note-trash-icon").addEventListener("click",deleteNote);
 
 
     //add_and_backup_note(new_note);
+}
+
+function deleteNote(event){
+    console.dir(event.target.parentNode);
 }
 
 
