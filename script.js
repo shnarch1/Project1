@@ -8,7 +8,7 @@
 var config = {
     trash_icon_url:'http://www.endlessicons.com/wp-content/uploads/2012/12/trash-icon-614x460.png',
     note_iamge:'notebg.png'
-}
+};
 
 var form = document.querySelector("#input-container > form");
 form.addEventListener("submit",save_note);
@@ -22,7 +22,7 @@ function Note(text, date, time, id) {
     this.text = text;
     this.date = date;
     this.time = time;
-};
+}
 
 function sync_storage(){
     var notes_backup = localStorage.getItem("notes_backup");
@@ -30,7 +30,7 @@ function sync_storage(){
         my_notes = JSON.parse(notes_backup);
     }
     console.dir(my_notes);
-};
+}
 
 //function add_and_backup_note(new_note){
 //    my_notes.push(new_note);
@@ -49,48 +49,48 @@ function createImageElement(src, class_name){
     var img = createElement("img", class_name);
     img.src=src;
     return img;
-};
+}
 
 function createParagraphElement(text, class_name) {
     var p_tag = createElement("p", class_name);
     p_tag.textContent = text;
     return p_tag;
-};
+}
 
 function createNoteElement(text, date, time){
     var note = createElement("div", "note");
-    var note_img = createImageElement(config.note_iamge);
+    var note_img = createImageElement(config.note_iamge, "note-img");
     var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
     var note_text = createParagraphElement(text, "note-text");
     var note_date = createParagraphElement(date, "note-date");
     var note_time = createParagraphElement(time, "note-time");
-    note.appendChild(trash_icon);
     note.appendChild(note_img);
+    note.appendChild(trash_icon);
     note.appendChild(note_text);
     note.appendChild(note_date);
     note.appendChild(note_time);
 
     return note;
-};
+}
 
 function createNoteObject(text, date, time){
     var new_note = new Note(text, date, time, new Date().getTime());
     return new_note;
-};
+}
 
 function addNoteToList(new_note){
     my_notes.push(new_note);
-};
+}
 
 function backupNotesList(){
     localStorage.setItem("notes_backup",JSON.stringify(my_notes))
-};
+}
 
 function printNote(note_element){
 
     notes_container = document.querySelector("#notes-container");
     notes_container.appendChild(note_element);
-};
+}
 
 function save_note(event){
     
@@ -115,7 +115,7 @@ function save_note(event){
 
 
     //add_and_backup_note(new_note);
-};
+}
 
 
 //var p = createParagraphElement("avi is here", "note-text")

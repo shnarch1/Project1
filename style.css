@@ -134,11 +134,12 @@ textarea:focus{
 
 .note-trash-icon{
 	position: absolute;
-	visibility: hidden;
+	opacity: 0;
 	width:50px;
 	right:10px;
 	top:15px;
 }
+
 
 .input-background {
     display: block;
@@ -153,10 +154,7 @@ textarea:focus{
 }*/
 
 
-.note-img:hover ~ .note-trash-icon{
-	position: absolute;
-	visibility: visible;
-	width:50px;
-	right:10px;
-	top:15px;
+.note-img:hover + .note-trash-icon, .note-trash-icon:hover{
+	/* The second hover wass added in order to prevent icon jitter*/
+	opacity: 1;
 }
