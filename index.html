@@ -16,12 +16,13 @@
     <main>
         <section id="input-container">
             <form action="ubuntu.local">
-                <textarea id="input-text" rows="3" maxlength="153"></textarea>
+                <textarea id="input-text" rows="2" placeholder="Write a new task" required></textarea>
                 <div id="input-footer">
-                    <input id="input-date" type="date" name="date" />
+                    <input id="input-date" type="date" name="date" required />
                     <input id="input-time" type="time" name="time" />
                     <input type="submit" />
                 </div>
+                <small>Make sure that your inputs are valid and not empty</small>
             </form>
         </section>
         <section id="notes-container">
