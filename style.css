@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -25,6 +27,13 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+:root{
+	--form-font: 'Gloria Hallelujah', cursive;
+	--note-font: 'Gloria Hallelujah', cursive;
+	--date-font: 'Gloria Hallelujah', cursive;
+	--time-font: 'Gloria Hallelujah', cursive;
+}
+
 body {
 	line-height: 1;
 }
@@ -80,7 +89,7 @@ body{
 	width: 100%;
 	line-height: 33px;
 	font-size: large;
-	scroll-behav
+	font-family: var(--form-font);
 }
 
 textarea:focus{
@@ -92,7 +101,7 @@ textarea:focus{
 	margin-top: 22px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 #notes-container{
@@ -109,7 +118,6 @@ textarea:focus{
 	transition: opacity 2s linear;
 }
 
-
 .note-fade-in{
 	opacity: 1;
 }
@@ -122,6 +130,7 @@ textarea:focus{
 	width: 170px;
 	height:150px;
 	overflow: auto;
+	font-family: var(--note-font);;
 }
 
 .note-date{
@@ -130,6 +139,7 @@ textarea:focus{
 	width:160px;
 	bottom: 35px;
 	left: 40px;
+	font-family: var(--date-font);
 }
 
 .note-time{
@@ -138,14 +148,15 @@ textarea:focus{
 	width:160px;
 	bottom: 15px;
 	left: 40px;
+	font-family: var(--time-font);
 }
 
 .note-trash-icon{
 	position: absolute;
 	opacity: 0;
-	width:50px;
-	right:10px;
-	top:15px;
+	width:24px;
+	right:25px;
+	top:22px;
 	cursor: pointer;
 }
 
@@ -166,4 +177,14 @@ textarea:focus{
 .note-img:hover + .note-trash-icon, .note-trash-icon:hover{
 	/* The second hover was added in order to prevent icon jitter*/
 	opacity: 1;
+}
+
+
+#err-msg {
+	display: none;
+	color:red;
+	font-weight: bold;
+	padding-top: 12px;
+	text-align: center;
+	padding-left: 80px;
 }

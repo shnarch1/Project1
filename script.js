@@ -6,23 +6,65 @@
 //console.dir(form);
 
 var config = {
-    trash_icon_url:'http://www.endlessicons.com/wp-content/uploads/2012/12/trash-icon-614x460.png',
+    trash_icon_url:'https://maxcdn.icons8.com/Android/PNG/24/Editing/delete-24.png',
     note_iamge:'notebg.png'
 };
+
+var my_notes = [];
 
 var form = document.querySelector("#input-container > form");
 form.addEventListener("submit",saveNote);
 
-ta = document.querySelector("textarea")
-ta.addEventListener("invalid", test);
+var textarea = document.querySelector("textarea");
+textarea.addEventListener("invalid", popErrorMsg);
 
-function test(){
-    console.log("alert");
+var date_input = document.querySelector("#input-date");
+date_input.addEventListener("invalid", popErrorMsg);
+
+var time_input = document.querySelector("#input-time");
+time_input.addEventListener("invalid", popErrorMsg);
+
+function popErrorMsg(e){
+    var err_msg = document.querySelector("#err-msg");
+    err_msg.style.display = "block";
 }
 
-var trash_icon = document.querySelector(".note-trash-icon")
-trash_icon.addEventListener("click",deleteNote)
-var my_notes = [];
+function removeErrorMsg(e){
+    var err_msg = document.querySelector("#err-msg");
+    err_msg.style.display = "none";
+}
+
+function isErrorMSg(){
+    var err_msg = document.querySelector("#err-msg");
+    if (err_msg.style.display != "none"){
+        return true;
+    }
+    else return false;
+}
+
+function isPast(time, date){
+
+    var splited_time = time.split(":");
+    var now = new Date();
+
+    if (time != ""){
+        date.setHours(parseInt(splited_time[0]), parseInt(splited_time[1]));
+    }
+
+    var now = new Date();
+
+    console.log(date);
+    console.log(now);
+    if (now > date){
+        return true;
+    }
+    else
+        return false;
+}
+
+//var trash_icon = document.querySelector(".note-trash-icon");
+//trash_icon.addEventListener("click",deleteNote);
+
 
 window.onload = function() {
     syncListAndBackup()
@@ -144,14 +186,19 @@ function saveNote(event){
     var date = document.querySelector("#input-date");
     var time = document.querySelector("#input-time");
 
-    if (text.value == null){
-        error_msg = createParagraphElement("Please fill all the fields in the form");
-        form.appendChild(error_msg); 
-    }
+    //if (text.value == null){
+    //    error_msg = createParagraphElement("Please fill all the fields in the form");
+    //    form.appendChild(error_msg);
+    //}
 
     //console.log(text.value);
     //console.log(date.value);
     //console.log(time.value);
+
+    if (isPast(time.value,date.valueAsDate)){
+        popErrorMsg();
+        return false;
+    }
 
     new_note_object = createNoteObject(text.value, date.value, time.value);
     //console.dir(new_note);
@@ -169,6 +216,10 @@ function saveNote(event){
     text.value = null;
     time.value = null;
     date.value = null;
+
+    if(isErrorMSg()){
+        removeErrorMsg();
+    }
 }
 
 function deleteNote(event){
