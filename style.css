@@ -1,61 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
 
+body{
+    background: url(tile.jpg);
+    margin:0;
+}
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	box-sizing: border-box;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
 :root{
 	--form-font: 'Gloria Hallelujah', cursive;
 	--note-font: 'Gloria Hallelujah', cursive;
 	--date-font: 'Gloria Hallelujah', cursive;
 	--time-font: 'Gloria Hallelujah', cursive;
-}
-
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-input, select, option, a{ box-sizing: border-box; }
-body{
-    background: url(tile.jpg);
-    margin:0;
 }
 
 #header{
@@ -79,10 +33,12 @@ body{
 	background-repeat: repeat-y;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	padding-right: 5px;
+	padding-left: 80px;
 }
 #input-container textarea{ 
 	margin-top: 10px;
-	padding-left: 80px;
+	/*padding-left: 80px;*/
 	background: none;
 	border: none;
 	resize:none;
@@ -97,11 +53,16 @@ textarea:focus{
 }
 
 #input-footer{
-	padding-left: 77px;
+	/*padding-left: 77px;*/
 	margin-top: 22px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
+}
+
+#input-footer > input{
+	width:133px;
+	margin-bottom: 7px;
 }
 
 #notes-container{
@@ -109,20 +70,21 @@ textarea:focus{
 	margin:0 auto;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 }
 
-.note{
+/*.note{
 	padding-left:35px;
 	position: relative;
 	opacity: 0;
 	transition: opacity 2s linear;
-}
+}*/
 
-.note-fade-in{
+/*.note-fade-in{
 	opacity: 1;
-}
+}*/
 
-.note-text{
+/*.note-text{
 	position: absolute;
 	top: 45px;
 	left: 40px;
@@ -130,41 +92,41 @@ textarea:focus{
 	width: 170px;
 	height:150px;
 	overflow: auto;
-	font-family: var(--note-font);;
-}
+	font-family: var(--note-font);
+}*/
 
-.note-date{
+/*.note-date{
 	position: absolute;
 	margin-bottom: 0;
 	width:160px;
 	bottom: 35px;
 	left: 40px;
 	font-family: var(--date-font);
-}
+}*/
 
-.note-time{
+/*.note-time{
 	position: absolute;
 	margin-bottom: 0;
 	width:160px;
 	bottom: 15px;
 	left: 40px;
 	font-family: var(--time-font);
-}
+}*/
 
-.note-trash-icon{
+/*.note-trash-icon{
 	position: absolute;
 	opacity: 0;
 	width:24px;
 	right:25px;
 	top:22px;
 	cursor: pointer;
-}
+}*/
 
 
-.input-background {
+/*.input-background {
     display: block;
     margin: 0 auto;
-}
+}*/
 
 
 /*@media only screen and (max-width: 600px){
@@ -174,17 +136,73 @@ textarea:focus{
 }*/
 
 
-.note-img:hover + .note-trash-icon, .note-trash-icon:hover{
-	/* The second hover was added in order to prevent icon jitter*/
+/*.note-img:hover + .note-trash-icon, .note-trash-icon:hover{
+
 	opacity: 1;
-}
+}*/
 
 
 #err-msg {
 	display: none;
 	color:red;
 	font-weight: bold;
-	padding-top: 12px;
+	padding-top: 6px;
 	text-align: center;
-	padding-left: 80px;
+}
+
+.note{
+	background: url("notebg.png") no-repeat;
+	width:200px;
+	height:250px;
+}
+
+.note-inner{
+	display: flex;
+	flex-wrap: wrap;
+	width:179px;
+	height:230px;
+	margin-top:15px;
+	padding-left: 5px;
+}
+
+.btn-container{
+	height: 24px;
+	width:100%;
+	margin-top: 7px;
+	padding-left: 145px;
+	opacity: 0;
+}
+
+.trash-btn{
+	position: absolute;
+	background-color: transparent;
+	border:none;
+	padding:0;
+	height:24px;
+	/*margin-top: 25px;
+	margin-left: 150px;*/
+	
+}
+
+.note-text{
+	width:100%;
+	height: 150px;
+	margin-bottom: 0;
+	font-family: var(--note-font);
+}
+
+.note-time{
+	width: 100%;
+	margin-bottom: 0;
+	font-family: var(--time-font);
+}
+
+.note-date{
+	width:100%;
+	margin-bottom: 0;
+	font-family: var(--date-font);
+}
+
+.note-inner:hover > .btn-container{
+	opacity:1;
 }

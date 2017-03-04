@@ -112,7 +112,7 @@ function createParagraphElement(text, class_name) {
     return p_tag;
 }
 
-function createNoteElement(text, date, time){
+/*function createNoteElement(text, date, time){
     var note = createElement("div", "note");
     var note_img = createImageElement(config.note_iamge, "note-img");
     var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
@@ -126,11 +126,33 @@ function createNoteElement(text, date, time){
     note.appendChild(note_time);
 
     return note;
+}*/
+
+function createNoteDOMElement(text, date, time) {
+    var note = createElement("div", "note");
+    var note_inner = createElement("div", "note-inner");
+    var btn_container = createElement("div", "btn-container");
+    var btn = createElement("button", "trash-btn");
+    var trash_icon = createImageElement(config.trash_icon_url);
+    var note_text = createParagraphElement(text, "note-text");
+    var note_date = createParagraphElement(date, "note-date");
+    var note_time = createParagraphElement(time, "note-time");
+
+    btn.addEventListener("click",deleteNote);
+
+    btn.appendChild(trash_icon);
+    btn_container.appendChild(btn);
+    note_inner.appendChild(btn_container);
+    note_inner.appendChild(note_text);
+    note_inner.appendChild(note_date);
+    note_inner.appendChild(note_time);
+    note.appendChild(note_inner);
+
+    return note;
 }
 
-
 function setNoteElementID(dom_object, note_id){
-    dom_object.note_id = note_id;
+    dom_object.setAttribute('data-note-id',note_id);
 }
 
 function createNoteObject(text, date, time){
@@ -144,7 +166,7 @@ function addNoteToList(new_note){
 
 function removeNoteFromList(note){
     for(var i =0; i<my_notes.length; i++){
-        if (my_notes[i]._id == note.note_id){
+        if (my_notes[i]._id == note.dataset.noteId){
             my_notes.splice(i,1);
             return true;
         }
@@ -165,9 +187,9 @@ function printNote(note_element){
 
 function printAllNotesFromList(){
     for(var i = 0; i < my_notes.length; i++){
-        note_element = createNoteElement(my_notes[i].text, my_notes[i].date, my_notes[i].time);
+        note_element = createNoteDOMElement(my_notes[i].text, my_notes[i].date, my_notes[i].time);
         setNoteElementID(note_element, my_notes[i]._id);
-        note_element.querySelector(".note-trash-icon").addEventListener("click",deleteNote);
+        //note_element.querySelector(".note-trash-icon").addEventListener("click",deleteNote);
     
         printNote(note_element);
     }
@@ -186,30 +208,17 @@ function saveNote(event){
     var date = document.querySelector("#input-date");
     var time = document.querySelector("#input-time");
 
-    //if (text.value == null){
-    //    error_msg = createParagraphElement("Please fill all the fields in the form");
-    //    form.appendChild(error_msg);
-    //}
-
-    //console.log(text.value);
-    //console.log(date.value);
-    //console.log(time.value);
-
     if (isPast(time.value,date.valueAsDate)){
         popErrorMsg();
         return false;
     }
 
     new_note_object = createNoteObject(text.value, date.value, time.value);
-    //console.dir(new_note);
     addNoteToList(new_note_object);
-    //console.dir(my_notes);
     backupNotesList();
 
-    new_note_element = createNoteElement(new_note_object.text, new_note_object.date, new_note_object.time);
+    new_note_element = createNoteDOMElement(new_note_object.text, new_note_object.date, new_note_object.time);
     setNoteElementID(new_note_element, new_note_object._id);
-    //console.log(new_note_element);
-    new_note_element.querySelector(".note-trash-icon").addEventListener("click",deleteNote);
     
     printNote(new_note_element);
 
@@ -222,9 +231,18 @@ function saveNote(event){
     }
 }
 
+function findParentNodeByClassName(dom_object, class_name){
+    while(dom_object.className.split(" ").indexOf(class_name) < 0){
+        dom_object = dom_object.parentNode
+    }
+
+    return dom_object;
+}
+
 function deleteNote(event){
     
-    note_to_delete = event.target.parentNode;
+    //note_to_delete = event.target.parentNode;
+    note_to_delete = findParentNodeByClassName(event.target, "note");
     removeNoteFromList(note_to_delete);
     removeNoteFromScreen(note_to_delete);
     backupNotesList();
@@ -234,7 +252,7 @@ function deleteNote(event){
 //var p = createParagraphElement("avi is here", "note-text")
 //console.dir(p);
 
-//var note = createNoteElement("Hi, Avi is here!");
+//var note = createNoteDOMElement("Hi, Avi is here!");
 //console.dir(note);
 //section = document.querySelector("#notes-container")
 //section.appendChild(note);
