@@ -80,9 +80,6 @@ textarea:focus{
 	transition: opacity 2s linear;
 }*/
 
-/*.note-fade-in{
-	opacity: 1;
-}*/
 
 /*.note-text{
 	position: absolute;
@@ -154,6 +151,12 @@ textarea:focus{
 	background: url("notebg.png") no-repeat;
 	width:200px;
 	height:250px;
+	opacity: 0;
+	transition: opacity 1s linear;
+}
+
+.note-fade-in{
+	opacity: 1;
 }
 
 .note-inner{

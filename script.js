@@ -10,7 +10,7 @@ var config = {
     note_iamge:'notebg.png'
 };
 
-var my_notes = [];
+var my_notes = new Object;
 
 var form = document.querySelector("#input-container > form");
 form.addEventListener("submit",saveNote);
@@ -160,17 +160,34 @@ function createNoteObject(text, date, time){
     return new_note;
 }
 
-function addNoteToList(new_note){
+/*function addNoteToList(new_note){
     my_notes.push(new_note);
+}*/
+
+function addNoteToList(new_note){
+    my_notes[new_note._id] = new_note;
 }
 
-function removeNoteFromList(note){
+/*function removeNoteFromList(note){
     for(var i =0; i<my_notes.length; i++){
         if (my_notes[i]._id == note.dataset.noteId){
             my_notes.splice(i,1);
             return true;
         }
     }
+}*/
+
+/*function removeNoteFromList(note){
+    for(var i =0; i<my_notes.length; i++){
+        if (my_notes[i]._id == note.dataset.noteId){
+            my_notes.splice(i,1);
+            return true;
+        }
+    }
+}*/
+
+function removeNoteFromList(note){
+    delete my_notes[note.dataset.noteId]
 }
 
 function backupNotesList(){
@@ -181,11 +198,11 @@ function printNote(note_element){
 
     notes_container = document.querySelector("#notes-container");
     notes_container.appendChild(note_element);
-    note_element.className += " note-fade-in";
+    setTimeout(function(){ note_element.classList.add("note-fade-in"); }, 100);
 
 }
 
-function printAllNotesFromList(){
+/*function printAllNotesFromList(){
     for(var i = 0; i < my_notes.length; i++){
         note_element = createNoteDOMElement(my_notes[i].text, my_notes[i].date, my_notes[i].time);
         setNoteElementID(note_element, my_notes[i]._id);
@@ -193,11 +210,20 @@ function printAllNotesFromList(){
     
         printNote(note_element);
     }
+}*/
+
+function printAllNotesFromList(){
+    for (note_id in my_notes){
+        note_element = createNoteDOMElement(my_notes[note_id].text, my_notes[note_id].date, my_notes[note_id].time);
+        setNoteElementID(note_element, note_id);
+        printNote(note_element);
+    }
 }
 
 function removeNoteFromScreen(note){
     notes_container = note.parentNode;
-    notes_container.removeChild(note);
+    note.classList.remove("note-fade-in")
+    setTimeout(function(){ notes_container.removeChild(note); }, 1000);
 }
 
 function saveNote(event){
@@ -248,17 +274,3 @@ function deleteNote(event){
     backupNotesList();
 }
 
-
-//var p = createParagraphElement("avi is here", "note-text")
-//console.dir(p);
-
-//var note = createNoteDOMElement("Hi, Avi is here!");
-//console.dir(note);
-//section = document.querySelector("#notes-container")
-//section.appendChild(note);
-
-//var p = createElement("p","note-text")
-//document.body.appendChild(p)
-//var p2 = createParagraphElement("p2","note-text" )
-//document.body.appendChild(p2)
-//console.dir(p2)
