@@ -24,6 +24,24 @@ date_input.addEventListener("invalid", popErrorMsg);
 var time_input = document.querySelector("#input-time");
 time_input.addEventListener("invalid", popErrorMsg);
 
+window.setInterval(autoDraft, 5000);
+
+function autoDraft(){
+    var draft = new Object;
+    draft.text  = textarea.value;
+    draft.date = date_input.value;
+    draft.time = time_input.value;
+
+    localStorage.setItem("draft", JSON.stringify(draft))
+}
+
+function loadDraft(){
+    var draft = JSON.parse(localStorage.getItem("draft"));
+    textarea.value = draft.text;
+    date_input.value = draft.date;
+    time_input.value = draft.time;
+}
+
 function popErrorMsg(e){
     var err_msg = document.querySelector("#err-msg");
     err_msg.style.display = "block";
@@ -69,6 +87,7 @@ function isPast(time, date){
 window.onload = function() {
     syncListAndBackup()
     printAllNotesFromList();
+    loadDraft();
 };
 
 

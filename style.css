@@ -3,6 +3,7 @@
 body{
     background: url(tile.jpg);
     margin:0;
+	font-size: 14px;
 }
 
 :root{
@@ -35,6 +36,7 @@ body{
 	padding-bottom: 10px;
 	padding-right: 5px;
 	padding-left: 80px;
+	box-sizing: border-box;
 }
 #input-container textarea{ 
 	margin-top: 10px;
@@ -162,7 +164,7 @@ textarea:focus{
 .note-inner{
 	display: flex;
 	flex-wrap: wrap;
-	width:179px;
+	width:174px;
 	height:230px;
 	margin-top:15px;
 	padding-left: 5px;
@@ -182,27 +184,32 @@ textarea:focus{
 	border:none;
 	padding:0;
 	height:24px;
+	cursor: pointer;
 	/*margin-top: 25px;
 	margin-left: 150px;*/
-	
+}
+
+.trash-btn:focus{
+	outline:0;
 }
 
 .note-text{
 	width:100%;
 	height: 150px;
-	margin-bottom: 0;
+	margin: 0;
 	font-family: var(--note-font);
+	white-space: pre-wrap;
 }
 
 .note-time{
 	width: 100%;
-	margin-bottom: 0;
+	margin: 0;
 	font-family: var(--time-font);
 }
 
 .note-date{
 	width:100%;
-	margin-bottom: 0;
+	margin: 0;
 	font-family: var(--date-font);
 }
 
