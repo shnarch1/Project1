@@ -136,6 +136,7 @@ header{
 	margin: 0;
 	font-family: var(--note-font);
 	white-space: pre-wrap;
+	overflow: auto;
 }
 
 .note-time{
