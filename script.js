@@ -1,6 +1,3 @@
-/**
- * Created by avi on 09/02/17.
- */
 
 var config = {
     trash_icon_url:'https://maxcdn.icons8.com/Android/PNG/24/Editing/delete-24.png',
