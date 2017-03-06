@@ -6,6 +6,8 @@ body{
 	font-size: 14px;
 }
 
+/*############################################### Vars  ##############################################################*/
+
 :root{
 	--form-font: 'Gloria Hallelujah', cursive;
 	--note-font: 'Gloria Hallelujah', cursive;
@@ -13,34 +15,33 @@ body{
 	--time-font: 'Gloria Hallelujah', cursive;
 }
 
-#header{
-    display: block;
-    margin: 20px auto ;
+/*####################################################################################################################*/
+
+/*############################################### Header  ############################################################*/
+
+header{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-/*@media only screen and (max-width: 600px){
-    #header {
-        width:100%;
-    }
-}*/
+/*####################################################################################################################*/
+
+/*############################################### Input Section  #####################################################*/
 
 #input-container{
 	width: 90%;
 	max-width: 600px;
-	margin: 0 auto;
-	margin-bottom: 20px;
-    position: relative;
-	background: url("formbg.jpg");
-	background-repeat: repeat-y;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 5px;
-	padding-left: 80px;
+	margin: 0 auto 20px;
+	position: relative;
+	background: url("formbg.jpg") repeat-y;
+	padding: 10px 5px 10px 80px;
 	box-sizing: border-box;
 }
 #input-container textarea{ 
 	margin-top: 10px;
-	/*padding-left: 80px;*/
 	background: none;
 	border: none;
 	resize:none;
@@ -50,13 +51,12 @@ body{
 	font-family: var(--form-font);
 }
 
-textarea:focus{
+#input-container textarea:focus{
 	outline: 0;
 }
 
 #input-footer{
-	/*padding-left: 77px;*/
-	margin-top: 22px;
+	margin-top: 23px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -64,81 +64,20 @@ textarea:focus{
 
 #input-footer > input{
 	width:133px;
-	margin-bottom: 7px;
+	margin-bottom: 10px;
 }
 
+/*####################################################################################################################*/
+
+/*############################################### Notes Section  #####################################################*/
+
 #notes-container{
-	width:90%;
+	width:70%;
 	margin:0 auto;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-
-/*.note{
-	padding-left:35px;
-	position: relative;
-	opacity: 0;
-	transition: opacity 2s linear;
-}*/
-
-
-/*.note-text{
-	position: absolute;
-	top: 45px;
-	left: 40px;
-	margin-bottom: 0;
-	width: 170px;
-	height:150px;
-	overflow: auto;
-	font-family: var(--note-font);
-}*/
-
-/*.note-date{
-	position: absolute;
-	margin-bottom: 0;
-	width:160px;
-	bottom: 35px;
-	left: 40px;
-	font-family: var(--date-font);
-}*/
-
-/*.note-time{
-	position: absolute;
-	margin-bottom: 0;
-	width:160px;
-	bottom: 15px;
-	left: 40px;
-	font-family: var(--time-font);
-}*/
-
-/*.note-trash-icon{
-	position: absolute;
-	opacity: 0;
-	width:24px;
-	right:25px;
-	top:22px;
-	cursor: pointer;
-}*/
-
-
-/*.input-background {
-    display: block;
-    margin: 0 auto;
-}*/
-
-
-/*@media only screen and (max-width: 600px){
-    .input-background {
-        width:100%;
-    }
-}*/
-
-
-/*.note-img:hover + .note-trash-icon, .note-trash-icon:hover{
-
-	opacity: 1;
-}*/
 
 
 #err-msg {
@@ -171,7 +110,7 @@ textarea:focus{
 }
 
 .btn-container{
-	height: 24px;
+	height: 17px;
 	width:100%;
 	margin-top: 7px;
 	padding-left: 145px;
@@ -185,8 +124,6 @@ textarea:focus{
 	padding:0;
 	height:24px;
 	cursor: pointer;
-	/*margin-top: 25px;
-	margin-left: 150px;*/
 }
 
 .trash-btn:focus{
@@ -215,4 +152,31 @@ textarea:focus{
 
 .note-inner:hover > .btn-container{
 	opacity:1;
+}
+
+/*####################################################################################################################*/
+
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+
+	header img{
+		width: 63%;
+	}
+
+	#input-container > textarea{
+		height: 500px;
+	}
+
+	#input-footer > input{
+		width: 100%;
+		height:45px;
+	}
+
+	#notes-container {
+		justify-content: center;
+	}
+
+	#err-msg {
+		font-size: large;
+		padding-top: 0;
+	}
 }

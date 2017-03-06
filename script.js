@@ -2,9 +2,6 @@
  * Created by avi on 09/02/17.
  */
 
-//var form = document.querySelector("div");
-//console.dir(form);
-
 var config = {
     trash_icon_url:'https://maxcdn.icons8.com/Android/PNG/24/Editing/delete-24.png',
     note_iamge:'notebg.png'
@@ -26,13 +23,23 @@ time_input.addEventListener("invalid", popErrorMsg);
 
 window.setInterval(autoDraft, 5000);
 
+syncListAndBackup();
+printAllNotesFromList();
+loadDraft();
+
+/*window.onload = function() {
+    syncListAndBackup();
+    printAllNotesFromList();
+    loadDraft();
+}*/
+
 function autoDraft(){
     var draft = new Object;
     draft.text  = textarea.value;
     draft.date = date_input.value;
     draft.time = time_input.value;
 
-    localStorage.setItem("draft", JSON.stringify(draft))
+    localStorage.setItem("draft", JSON.stringify(draft));
 }
 
 function loadDraft(){
@@ -68,27 +75,14 @@ function isPast(time, date){
     if (time != ""){
         date.setHours(parseInt(splited_time[0]), parseInt(splited_time[1]));
     }
-
-    var now = new Date();
-
-    console.log(date);
-    console.log(now);
+    //console.log(date);
+    //console.log(now);
     if (now > date){
         return true;
     }
     else
         return false;
 }
-
-//var trash_icon = document.querySelector(".note-trash-icon");
-//trash_icon.addEventListener("click",deleteNote);
-
-
-window.onload = function() {
-    syncListAndBackup()
-    printAllNotesFromList();
-    loadDraft();
-};
 
 
 function Note(text, date, time, id) {
@@ -104,12 +98,6 @@ function syncListAndBackup(){
         my_notes = JSON.parse(notes_backup);
     }
 }
-
-//function add_and_backup_note(new_note){
-//    my_notes.push(new_note);
-//   localStorage.setItem("notes_backup",JSON.stringify(my_notes))
-//};
-
 
 function createElement(tag_name, class_name){
     var element = document.createElement(tag_name);
@@ -130,22 +118,6 @@ function createParagraphElement(text, class_name) {
     p_tag.textContent = text;
     return p_tag;
 }
-
-/*function createNoteElement(text, date, time){
-    var note = createElement("div", "note");
-    var note_img = createImageElement(config.note_iamge, "note-img");
-    var trash_icon = createImageElement(config.trash_icon_url, "note-trash-icon");
-    var note_text = createParagraphElement(text, "note-text");
-    var note_date = createParagraphElement(date, "note-date");
-    var note_time = createParagraphElement(time, "note-time");
-    note.appendChild(note_img);
-    note.appendChild(trash_icon);
-    note.appendChild(note_text);
-    note.appendChild(note_date);
-    note.appendChild(note_time);
-
-    return note;
-}*/
 
 function createNoteDOMElement(text, date, time) {
     var note = createElement("div", "note");
@@ -179,38 +151,16 @@ function createNoteObject(text, date, time){
     return new_note;
 }
 
-/*function addNoteToList(new_note){
-    my_notes.push(new_note);
-}*/
-
 function addNoteToList(new_note){
     my_notes[new_note._id] = new_note;
 }
 
-/*function removeNoteFromList(note){
-    for(var i =0; i<my_notes.length; i++){
-        if (my_notes[i]._id == note.dataset.noteId){
-            my_notes.splice(i,1);
-            return true;
-        }
-    }
-}*/
-
-/*function removeNoteFromList(note){
-    for(var i =0; i<my_notes.length; i++){
-        if (my_notes[i]._id == note.dataset.noteId){
-            my_notes.splice(i,1);
-            return true;
-        }
-    }
-}*/
-
 function removeNoteFromList(note){
-    delete my_notes[note.dataset.noteId]
+    delete my_notes[note.dataset.noteId];
 }
 
 function backupNotesList(){
-    localStorage.setItem("notes_backup",JSON.stringify(my_notes))
+    localStorage.setItem("notes_backup",JSON.stringify(my_notes));
 }
 
 function printNote(note_element){
@@ -221,15 +171,6 @@ function printNote(note_element){
 
 }
 
-/*function printAllNotesFromList(){
-    for(var i = 0; i < my_notes.length; i++){
-        note_element = createNoteDOMElement(my_notes[i].text, my_notes[i].date, my_notes[i].time);
-        setNoteElementID(note_element, my_notes[i]._id);
-        //note_element.querySelector(".note-trash-icon").addEventListener("click",deleteNote);
-    
-        printNote(note_element);
-    }
-}*/
 
 function printAllNotesFromList(){
     for (note_id in my_notes){
@@ -278,15 +219,14 @@ function saveNote(event){
 
 function findParentNodeByClassName(dom_object, class_name){
     while(dom_object.className.split(" ").indexOf(class_name) < 0){
-        dom_object = dom_object.parentNode
+        dom_object = dom_object.parentNode;
     }
 
     return dom_object;
 }
 
 function deleteNote(event){
-    
-    //note_to_delete = event.target.parentNode;
+
     note_to_delete = findParentNodeByClassName(event.target, "note");
     removeNoteFromList(note_to_delete);
     removeNoteFromScreen(note_to_delete);
