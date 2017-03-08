@@ -4,10 +4,12 @@ var config = {
     note_iamge:'notebg.png'
 };
 
-var my_notes = new Object;
+var my_notes = {};
 
 var form = document.querySelector("#input-container > form");
 form.addEventListener("submit",saveNote);
+form.addEventListener("change",autoDraft); //for date and time input change by mouse
+form.addEventListener("keyup",autoDraft);
 
 var textarea = document.querySelector("textarea");
 textarea.addEventListener("invalid", popErrorMsg);
@@ -18,7 +20,7 @@ date_input.addEventListener("invalid", popErrorMsg);
 var time_input = document.querySelector("#input-time");
 time_input.addEventListener("invalid", popErrorMsg);
 
-window.setInterval(autoDraft, 5000);
+var notes_container = document.querySelector("#notes-container");
 
 syncListAndBackup();
 printAllNotesFromList();
@@ -30,8 +32,8 @@ loadDraft();
     loadDraft();
 }*/
 
-function autoDraft(){
-    var draft = new Object;
+function autoDraft(event){
+    var draft = {};
     draft.text  = textarea.value;
     draft.date = date_input.value;
     draft.time = time_input.value;
@@ -41,9 +43,11 @@ function autoDraft(){
 
 function loadDraft(){
     var draft = JSON.parse(localStorage.getItem("draft"));
-    textarea.value = draft.text;
-    date_input.value = draft.date;
-    time_input.value = draft.time;
+    if (draft != null) {
+        textarea.value = draft.text;
+        date_input.value = draft.date;
+        time_input.value = draft.time;
+    }
 }
 
 function popErrorMsg(e){
@@ -77,10 +81,11 @@ function isPast(time, date){
     if (now > date){
         return true;
     }
-    else
+    else{
         return false;
-}
+    }
 
+}
 
 function Note(text, date, time, id) {
     this._id = id;
@@ -162,16 +167,21 @@ function backupNotesList(){
 
 function printNote(note_element){
 
-    notes_container = document.querySelector("#notes-container");
     notes_container.appendChild(note_element);
     setTimeout(function(){ note_element.classList.add("note-fade-in"); }, 100);
 
 }
 
-
 function printAllNotesFromList(){
-    for (note_id in my_notes){
-        note_element = createNoteDOMElement(my_notes[note_id].text, my_notes[note_id].date, my_notes[note_id].time);
+    //for (note_id in my_notes){
+    //    note_element = createNoteDOMElement(my_notes[note_id].text, my_notes[note_id].date, my_notes[note_id].time);
+    //    setNoteElementID(note_element, note_id);
+    //    printNote(note_element);
+    //}
+    var note_ids = Object.keys(my_notes);
+    for (var i = 0; i<note_ids.length; i++){
+        var note_id = note_ids[i];
+        var note_element = createNoteDOMElement(my_notes[note_id].text, my_notes[note_id].date, my_notes[note_id].time);
         setNoteElementID(note_element, note_id);
         printNote(note_element);
     }
@@ -187,9 +197,9 @@ function saveNote(event){
     
     event.preventDefault();
 
-    var text = document.querySelector("#input-text");
-    var date = document.querySelector("#input-date");
-    var time = document.querySelector("#input-time");
+    var text = event.target.querySelector("#input-text");
+    var date = event.target.querySelector("#input-date");
+    var time = event.target.querySelector("#input-time");
 
     if (isPast(time.value,date.valueAsDate)){
         popErrorMsg();
@@ -215,7 +225,7 @@ function saveNote(event){
 }
 
 function findParentNodeByClassName(dom_object, class_name){
-    while(dom_object.className.split(" ").indexOf(class_name) < 0){
+    while(!dom_object.classList.contains(class_name)){
         dom_object = dom_object.parentNode;
     }
 

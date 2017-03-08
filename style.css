@@ -72,11 +72,11 @@ header{
 /*############################################### Notes Section  #####################################################*/
 
 #notes-container{
-	width:70%;
+	max-width:600px;
 	margin:0 auto;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 
@@ -100,7 +100,7 @@ header{
 	opacity: 1;
 }
 
-.note-inner{
+.note-inner{ /* The note-inner class was created in order to limit the hover only in the inner part of the note*/
 	display: flex;
 	flex-wrap: wrap;
 	width:174px;
